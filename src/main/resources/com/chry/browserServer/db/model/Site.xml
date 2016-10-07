@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chry.browserServer.db.model.ISiteDao">
+	<select id="getSiteById" parameterType="String" resultType="Site">
+        <![CDATA[select id, url as pattern, name, type, risk from sites where id = #{id}]]>
+	</select>
+
+    <select id="getSiteByUrl" parameterType="String" resultType="Site">
+        <![CDATA[select id, url as pattern, name, type, risk from sites where url = #{pattern}]]>
+    </select>
+	
+	<select id="getAllSites" resultType="Site">
+	   <![CDATA[ select id, url as pattern, name, type, risk from sites order by id]]>
+	</select>
+	
+    <select id="getAllTypes" resultType="String">
+       <![CDATA[ select distinct type from sites]]>
+    </select>
+    
+	<insert  id="insertSite" parameterType="Site">
+       <if test="pattern!=null and pattern!='' and name!=null and name!='' and type!=null and type!='' and risk!=null and risk!=''">  
+	       <![CDATA[ insert into sites (url, name, type, risk) values (#{pattern}, #{name}, #{type}, #{risk})]]>
+	   </if>
+	</insert >
+		
+	<update id="updateSite" parameterType="Site">
+        <if test="id!=null and id !='' name!=null and name!='' and type!=null and type!='' and risk!=null and risk!=''">  
+	      <![CDATA[ UPDATE sites SET url = #{pattern}, name = #{name}, type = #{type}, risk = #{risk} WHERE id = #{id}]]>
+       </if>
+	</update>
+	
+    <delete id="deleteSite" parameterType="String">
+        <if test="id!=null and id !=''">  
+           <![CDATA[ DELETE FROM sites WHERE id = #{id}]]>
+        </if>
+    </delete>
+</mapper>

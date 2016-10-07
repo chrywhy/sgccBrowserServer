@@ -1,0 +1,88 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>用户管理</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="js/lib/bootstrap/bootstrap.min.css">  
+</head>
+<body>
+    <div id=userView class="container" style="display:none">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+				<div style="vertical-align:bottom; font-family:宋体;color:black;font-size:24px"> 
+					<label style="font-family:宋体;color:black;font-size:24px">添加用户</lable>
+					<a href="javascript:";><img id="addUserIcon" src="image/adduser.png" width=24></a>
+				</div> 
+                <hr/>
+		        <table id="userTab" class="table" style="font-family:宋体;color:black;font-size:20px;text-align:left">
+		            <thead>
+		                <tr>
+		                    <th>序号</th>
+		                    <th>用户ID</th>
+		                    <th>姓名</th>
+		                    <th>密码</th>
+		                    <th>权限</th>
+		                    <th>编辑/删除</th>
+		                </tr>
+		            </thead>
+                    <tbody id="userTabBody" align="left">
+	                    <script type='text/template' id='templateUserRow'>
+                            <tr id=user_tr_{%= trId %} style="background-color:{%=color%}">
+                                <td id=userSerial_{%= trId %}>{%= trId %}</td>
+                                <td id=userId_{%= trId %}>{%= user.uid %}</td>
+                                <td id=userName_{%= trId %}>{%= user.name %}</td>
+                                <td id=userPassword_{%= trId %}>
+                                    <div id=userPassword_div_{%= trId %}>******</div>
+                                    <input id=inputPassword_{%= trId %} type="text" value="{%= user.password %}" style="display:none">
+                                </td>
+                                <td id=userRole_{%= trId %}>
+                                    <div id=userRole_div_{%= trId %}>{%= user.role == 1 ? "普通" : "管理" %}</div>
+                                    <select id=selectRole_{%= trId %} style="display:none">
+                                        <option value=1 selected="selected">普通</option>
+                                        <option value=0>管理</option>
+                                    </select>
+                                </td>
+                                <td id=userOper_{%= trId %}>
+                                    <a href="javascript:;"><img id=userEdit_{%= trId %} src="image/edit.png" width=24>
+                                    <img id=userEditDone_{%= trId %} src="image/editDone.png" width=24 style="display:none"></a>
+                                    <a href="javascript:;"><img id=userDelete_{%= trId %} src="image/delete.png" width=24></a>
+                                </td>
+                            </tr>
+                        </script>
+	                    <script type='text/template' id='templateNewUserRow'>
+                            <tr id=user_tr_{%= trId %} style="background-color:{%=color%}">
+                                <td id=userSerial_{%= trId %}>{%= trId %}</td>
+                                <td><input id=newUserId_{%= trId %} type="text"></td>
+                                <td><input id=newUserName_{%= trId %} type="text"></td>
+                                <td><input id=newUserPassword_{%= trId %} type="text" value="sgcc"></td>
+                                <td>
+									<select id=newUserRole_{%= trId %}>
+										<option value=1 selected="selected">普通</option>
+										<option value=0>管理</option>
+									</select>
+								</td>
+								<td>
+                                    <a href="javascript:;"><img id=newUserEdit_{%= trId %} src="image/editdone.png" width=24></a>
+                                    <a href="javascript:;"><img id=newUserDelete_{%= trId %} src="image/delete.png" width=24></a>
+                                </td>
+                            </tr>
+                        </script>
+					</tbody>
+	   	        </table>
+            </div>
+        </div>
+    </div>
+
+    <!--
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    -->
+    <script src="js/lib/jquery-2.1.1.min.js"></script>
+    <script src="js/lib/bootstrap/bootstrap-3.3.7.min.js"></script>
+    <script src="js/lib/underscore-1.8.3.min.js"></script>
+    <script src="js/lib/backbone-1.3.3.min.js"></script>
+    <script src="js/adminUser.js?ver="1.1"></script>
+</body>
+</html>

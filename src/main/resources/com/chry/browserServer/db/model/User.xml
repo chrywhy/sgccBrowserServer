@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chry.browserServer.db.model.IUserDao">
+	<select id="getUserById" parameterType="String" resultType="User">
+    	select * from users where uid = #{uid}
+	</select>
+	
+	<select id="getAllUsers" resultType="User">
+	   <![CDATA[ select * from users where uid <> 'root' order by name]]>
+	</select>
+	
+	<insert  id="insertUser" parameterType="User">
+       <if test="uid!=null and uid !='' and name!=null and name!='' and password!=null and password!='' and role!=null and role!=''">  
+	       <![CDATA[ insert into users (uid, name, password, role) values (#{uid}, #{name}, #{password}, #{role})]]>
+	   </if>
+	</insert >
+		
+	<update id="updateUser" parameterType="User">
+       <if test="password!=null and password!='' and role!=null and role!=''">  
+	       <![CDATA[ UPDATE users SET password = #{password}, role = #{role} WHERE uid = #{uid}]]>
+	   </if>
+	</update>
+	
+	<update id="updatePassword">
+       <if test="password!=null and password!='' and uid!=null and uid!=''">  
+    	   <![CDATA[ UPDATE users SET password = #{password} WHERE uid = #{uid}]]>
+       </if>
+	</update>
+
+    <delete id="deleteUser" parameterType="String">
+       <if test="uid!=null and uid!=''">  
+           <![CDATA[ DELETE FROM users WHERE uid = #{uid}]]>
+       </if>
+    </delete>
+</mapper>
